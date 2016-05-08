@@ -1,11 +1,13 @@
 class Instance
-  attr_reader :cpu, :disk_usage, :processes, :instance_id
+  attr_reader :cpu, :disk_usage, :processes, :id, :os, :machine_name
 
-  def initialize(cpu:, disk_usage:, processes:, instance_id:)
+  def initialize(cpu:, disk_usage:, processes:, id:, os:, machine_name:)
     @cpu = cpu
     @disk_usage = disk_usage
     @processes = processes
-    @instance_id = instance_id
+    @id = id
+    @os = os
+    @machine_name = machine_name
   end
 
   def to_hash
@@ -14,10 +16,12 @@ class Instance
     # }.flatten]
     #TODO: Fix this
     h = Hash.new()
+    h["id"] = id
     h["cpu"] = cpu
     h["disk_usage"] = disk_usage
     h["processes"] = processes
-    h["instance_id"] = instance_id
+    h["os"] = os
+    h["machine_name"] = machine_name
     h
   end
 end

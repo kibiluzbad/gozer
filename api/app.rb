@@ -39,8 +39,21 @@ class GozerApi < Sinatra::Application
       r.db(rdb_config[:db]).table_create('instance').run(connection)
     rescue RethinkDB::RqlRuntimeError => err
       puts "Table `instance` already exists."
+    end
+
+    begin
+      r.db(rdb_config[:db]).table_create('instance_history').run(connection)
+    rescue RethinkDB::RqlRuntimeError => err
+      puts "Table `instance_history` already exists."
     ensure
       connection.close
+    end
+  end
+
+  helpers do
+    def is_authenticated? (key)
+      halt 403 if key.nil?
+      !session[:access_token].nil?
     end
   end
 

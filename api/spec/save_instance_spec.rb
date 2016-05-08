@@ -50,7 +50,7 @@ describe SaveInstance do
   end
 
 
-  let(:instance) { Instance.new(cpu: 10, disk_usage: 5, processes: %w(process1 process2), instance_id: 'i-035a444f5943facc8') }
+  let(:instance) { Instance.new(cpu: 10, disk_usage: 5, processes: %w(process1 process2), id: 'i-035a444f5943facc8', os: 'linux', machine_name: 'machine-name') }
 
   it 'craetes record in rethinkdb' do
 
@@ -59,8 +59,7 @@ describe SaveInstance do
     command.execute(connection: @connection)
 
     instanceSaved = r.table('instance')
-                        .filter({"instance_id" => instance.instance_id})
-                        .pluck('cpu', 'disk_usage', 'instance_id', 'processes')
+                        .filter({"id" => instance.id})
                         .run(@connection)
 
     expect(instanceSaved.to_a[0]).to match(instance.to_hash)

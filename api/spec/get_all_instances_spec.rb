@@ -37,7 +37,7 @@ describe GetAllInstances do
     end
 
     begin
-      r.table('instance').insert({:cpu=>10,:disk_usage=>5,:processes=> %w(p1 p2), :instance_id=>'i-035a444f5943facc8'}).run(@connection)
+      r.table('instance').insert({:cpu=>10,:disk_usage=>5,:processes=> %w(p1 p2), :id=>'i-035a444f5943facc8', :os => 'linux', :machine_name => 'machine-name'}).run(@connection)
     rescue RethinkDB::RqlRuntimeError => err
       puts "Cannot insert data"
     end
@@ -61,7 +61,6 @@ describe GetAllInstances do
     query = GetAllInstances.new
     results = query.execute(connection: @connection)
 
-    puts(results)
     expect(results.count).to eq(1)
   end
 end

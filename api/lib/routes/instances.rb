@@ -6,6 +6,7 @@ require_relative('../../lib/queries/init')
 class GozerApi < Sinatra::Application
   get '/instances' do
     content_type :json
+    is_authenticated?(env['HTTP_AUTHORIZATION'])
 
     query = GetAllInstances.new
     query.execute(connection: @rdb_connection).to_json

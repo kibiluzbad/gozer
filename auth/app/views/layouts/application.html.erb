@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Doorkeeper OAuth 2 Provider</title>
+  <%= stylesheet_link_tag    "//netdna.bootstrapcdn.com/twitter-bootstrap/2.1.1/css/bootstrap.min.css", "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<%= render 'layouts/header' %>
+
+<div class="container">
+  <%= render 'layouts/flash', :flash => flash %>
+  <div class="row">
+    <%= yield %>
+  </div>
+</div>
+
+<%= javascript_include_tag "//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js",
+                           "//netdna.bootstrapcdn.com/twitter-bootstrap/2.1.1/js/bootstrap.min.js",
+                           "application" %>
+
+</body>
+</html>

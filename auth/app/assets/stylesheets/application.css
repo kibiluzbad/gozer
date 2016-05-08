@@ -1,0 +1,49 @@
+/*
+ * This is a manifest file that'll automatically include all the stylesheets available in this directory
+ * and any sub-directories. You're free to add application-wide styles to this file and they'll appear at
+ * the top of the compiled file, but it's generally better to create a new file per style scope.
+ *= require_self
+ *= require_tree .
+*/
+
+body {
+  padding-top: 60px;
+}
+
+section {
+  padding-top: 30px;
+}
+
+section > .row {
+  margin-bottom: 10px;
+}
+
+.row h2 {
+  margin-bottom: 10px;
+}
+
+.quickstart {
+  text-align:center;
+  margin-bottom:20px;
+}
+
+.hero-unit {
+  margin-bottom: 0;
+}
+
+.hero-unit p.large {
+  margin: 5px 0 10px 0;
+}
+
+.hero-unit .btn {
+  margin-right: 20px;
+}
+
+.hero-unit iframe,
+.hero-unit h2 span {
+  vertical-align: middle;
+}
+
+.inline_block {
+  display: inline-block;
+}
