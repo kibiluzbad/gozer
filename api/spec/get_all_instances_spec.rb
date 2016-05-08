@@ -1,8 +1,8 @@
 require('rethinkdb')
-require_relative('../lib/commands/save_instance')
+require_relative('../lib/queries/get_all_instances')
 require_relative('../lib/models/instance')
 
-describe SaveInstance do
+describe GetAllInstances do
 
   let(:r) { RethinkDB::RQL.new }
   let(:rdb_config) { {
@@ -15,7 +15,7 @@ describe SaveInstance do
 
     begin
       @connection = r.connect(:host => rdb_config[:host],
-                             :port => rdb_config[:port])
+                              :port => rdb_config[:port])
     rescue Exception => err
       puts "Cannot connect to RethinkDB database #{rdb_config[:host]}:#{rdb_config[:port]} (#{err.message})"
       Process.exit(1)
@@ -31,9 +31,17 @@ describe SaveInstance do
 
     begin
       r.db(rdb_config[:db]).table_create('instance').run(@connection)
+
     rescue RethinkDB::RqlRuntimeError => err
       puts "Table `instance` already exists."
     end
+
+    begin
+      r.table('instance').insert({:cpu=>10,:disk_usage=>5,:processes=> %w(p1 p2), :instance_id=>'i-035a444f5943facc8'}).run(@connection)
+    rescue RethinkDB::RqlRuntimeError => err
+      puts "Cannot insert data"
+    end
+
 
   end
 
@@ -49,20 +57,11 @@ describe SaveInstance do
 
   end
 
+  it 'returns all saved instances data' do
+    query = GetAllInstances.new
+    results = query.execute(connection: @connection)
 
-  let(:instance) { Instance.new(cpu: 10, disk_usage: 5, processes: %w(process1 process2), instance_id: 'i-035a444f5943facc8') }
-
-  it 'craetes record in rethinkdb' do
-
-    command = SaveInstance.new
-    command.instance(instance: instance)
-    command.execute(connection: @connection)
-
-    instanceSaved = r.table('instance')
-                        .filter({"instance_id" => instance.instance_id})
-                        .pluck('cpu', 'disk_usage', 'instance_id', 'processes')
-                        .run(@connection)
-
-    expect(instanceSaved.to_a[0]).to match(instance.to_hash)
+    puts(results)
+    expect(results.count).to eq(1)
   end
 end

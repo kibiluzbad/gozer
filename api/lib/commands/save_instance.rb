@@ -8,6 +8,6 @@ class SaveInstance
   end
 
   def execute(connection:)
-    r.table('instance').insert(@instance.to_hash).run(connection)
+    r.table('instance').insert(@instance.to_hash).run(connection).to_a
   end
 end

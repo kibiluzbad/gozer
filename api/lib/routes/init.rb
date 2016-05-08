@@ -1,1 +1,1 @@
-require_relative('test')
+require_relative('instances')

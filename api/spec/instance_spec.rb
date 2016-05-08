@@ -25,7 +25,7 @@ describe Instance do
   end
 
   context 'Hash' do
-    it 'creates hash with instance parameters' do
+    it 'creates with instance parameters' do
       actual = instance.to_hash()
 
       expect(actual.is_a?(Hash)).to be true
