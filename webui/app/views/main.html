@@ -1,0 +1,31 @@
+<div class="jumbotron">
+  <h1>'Allo, 'Allo!</h1>
+  <p class="lead">
+    <img src="images/yeoman.png" alt="I'm Yeoman"><br>
+    Always a pleasure scaffolding your apps.
+  </p>
+  <p><a class="btn btn-lg btn-success" ng-href="#/">Splendid!<span class="glyphicon glyphicon-ok"></span></a></p>
+</div>
+
+<div class="row marketing">
+  <table class="table table-hover" ng-if="instances.length > 0">
+    <thead>
+    <tr>
+      <th>#ID</th>
+      <th>CPU %</th>
+      <th>Disk %</th>
+      <th>Machine Name</th>
+      <th>OS</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="instance in instances">
+      <td>{{instance.id}}</td>
+      <td class="text-right">{{instance.cpu | number:2}}</td>
+      <td class="text-right">{{instance.disk_usage | number:2}}</td>
+      <td>{{instance.machine_name}}</td>
+      <td>{{instance.os}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>

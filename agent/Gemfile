@@ -2,16 +2,12 @@ source 'https://rubygems.org'
 
 ruby '2.3.1'
 
-gem 'puma'
-gem 'faye-websocket'
-gem 'sinatra', '~> 1.4.7git'
-gem 'shotgun', '~> 0.9.1'
-
-gem 'httparty'
-gem 'oauth2'
-gem 'em-websocket'
-gem 'rethinkdb'
-gem 'sinatra-cross_origin', '~> 0.3.1'
+gem 'backburner'
+gem 'rest-client'
+gem 'usagewatch'
+gem 'system'
+gem 'sys-filesystem'
+gem 'macaddr'
 
 group :test, :development do
   gem 'rspec', '~> 3.4.0'

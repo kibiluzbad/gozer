@@ -8,6 +8,6 @@ class SaveInstance
   end
 
   def execute(connection:)
-    r.table('instance').insert(@instance.to_hash).run(connection).to_a
+    r.table('instance').insert(@instance.to_hash, :conflict => "replace").run(connection).to_a
   end
 end

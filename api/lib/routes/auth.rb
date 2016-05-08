@@ -22,11 +22,11 @@ class GozerApi < Sinatra::Application
   end
 
 
-  get '/token' do
+  post '/token' do
     content_type :json
 
     scope = params[:scope] || "public"
-    token = client.client_credentials.get_token(:client_id => '4de2fd79af6950291687a9df6f9ab4de93246f020a3e440186bb77fdaba25b0f', :client_secret => '6e6009447cfd2d1a0a8792805fd9efa1a6f01c6faa7b7382659b1b1446b57f2a', :scope => scope, )
+    token = client.client_credentials.get_token(:client_id => params[:client_id], :client_secret => params[:client_secret], :scope => scope, )
     session[:access_token]  = token.token
     token.to_hash.to_json
   end
