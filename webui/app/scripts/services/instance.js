@@ -9,7 +9,7 @@
  */
 angular.module('gozerWebApp')
   .service('Instance', ['$resource', function ($resource) {
-    var Instance = $resource('http://localhost:9292' + '/instances');
+    var Instance = $resource('http://192.168.99.100:9292' + '/instances');
 
     return Instance;
   }]);

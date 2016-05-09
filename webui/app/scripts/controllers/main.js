@@ -10,7 +10,7 @@
 angular.module('gozerWebApp')
   .controller('MainCtrl', ['$scope','Instance',function ($scope, Instance) {
     function start() {
-      var ws = new WebSocket('ws://localhost:9292');
+      var ws = new WebSocket('ws://192.168.99.100:9292');
       ws.onopen = function () {
         $scope.$root.status = "Online";
         $scope.$root.$apply();

@@ -1,0 +1,6 @@
+auth:
+  build: .
+  command: 'bash -c ''bundle exec rails s'''
+  working_dir: /app/user/
+  ports:
+    - '3000:3000'

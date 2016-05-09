@@ -1,0 +1,14 @@
+agent:
+  build: .
+  command: 'bash -c ''./bin/agent.rb'''
+  working_dir: /app/user/
+  environment:
+    BEANSTALKD_HOST: 'beanstalk://beanstalkd'
+    TOKEN_URL: 'http://192.168.99.100:9292/token'
+    API_URL: 'http://192.168.99.100:9292'    
+  links:
+    - beanstalkd
+beanstalkd:
+  image: schickling/beanstalkd
+  ports:
+    - '11300:11300'

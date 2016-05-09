@@ -1,0 +1,19 @@
+api:
+  build: .
+  command: 'bash -c ''bundle exec puma'''
+  working_dir: /app/user/
+  environment:
+    PORT: 9292
+    RDB_HOST: 'rethink'
+    SITE: 'http://192.168.99.100:9292'
+    OAUTH2_CLIENT_ID: '4de2fd79af6950291687a9df6f9ab4de93246f020a3e440186bb77fdaba25b0f'
+    OAUTH2_CLIENT_SECRET: '6e6009447cfd2d1a0a8792805fd9efa1a6f01c6faa7b7382659b1b1446b57f2a'
+  ports:
+    - '9292:9292'
+  links:
+    - rethink
+rethink:
+  image: rethinkdb:latest
+  ports:
+    - '8080:8080' 
+    - '28015:28015'

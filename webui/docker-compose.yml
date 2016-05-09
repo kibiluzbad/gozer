@@ -1,0 +1,7 @@
+webui:
+  build: .
+  command: 'bash -c ''grunt serve'''
+  working_dir: /app/user/
+  ports:
+    - '9000:9000'
+    - '35729:35729'
