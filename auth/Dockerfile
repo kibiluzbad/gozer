@@ -38,3 +38,4 @@ RUN gem install bundler
 ADD . /app/user/
 RUN bundle install
 RUN bundle exec rake db:migrate
+RUN bundle exec rake db:seed

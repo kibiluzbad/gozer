@@ -7,25 +7,33 @@
   <p><a class="btn btn-lg btn-success" ng-href="#/">Splendid!<span class="glyphicon glyphicon-ok"></span></a></p>
 </div>
 
-<div class="row marketing">
-  <table class="table table-hover" ng-if="instances.length > 0">
-    <thead>
-    <tr>
-      <th>#ID</th>
-      <th>CPU %</th>
-      <th>Disk %</th>
-      <th>Machine Name</th>
-      <th>OS</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr ng-repeat="instance in instances">
-      <td>{{instance.id}}</td>
-      <td class="text-right">{{instance.cpu | number:2}}</td>
-      <td class="text-right">{{instance.disk_usage | number:2}}</td>
-      <td>{{instance.machine_name}}</td>
-      <td>{{instance.os}}</td>
-    </tr>
-    </tbody>
-  </table>
+ <div class="row marketing">
+
+<div class="row" ng-if="instances.length > 0">
+  
+      <div class="col-md-3"><img src="http://deepakkarki.github.io/include/img/about/linux3.png" style="height: 148px"></div>
+      <div class="col-md-4">
+        <p><strong>MAC Adrress:</strong> <span ng-bind="instance.id"></span></p>
+        <p><strong>Machine name:</strong> <span ng-bind="instance.machine_name"></span></p>
+      </div>
+      <div class="col-md-2">
+          <nvd3-pie-chart
+            data="{key:'cpu', value: instance.cpu}"
+            showLabels="false"
+            donut="true"
+            donutRatio=".5"
+            donutLabelsOutside="true">
+        <svg height="80"></svg>
+    </nvd3-pie-chart>
+        </div>
+      <div class="col-md-2">
+         <nvd3-pie-chart
+            data="{key:'cpu', value: instance.disk_usage}"
+            showLabels="false"
+            donut="true"
+            donutRatio=".5"
+            donutLabelsOutside="true">
+        <svg height="80"></svg>
+      </div>
+  </div>
 </div>

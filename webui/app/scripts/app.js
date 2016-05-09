@@ -15,7 +15,10 @@ angular
     'ngResource',
     'ngRoute',
     'ngSanitize',
-    'ngTouch'
+    'ngTouch',
+    'blockUI',
+    'angular-growl',
+    'nvd3ChartDirectives',
   ])
   .config(function ($routeProvider) {
     $routeProvider

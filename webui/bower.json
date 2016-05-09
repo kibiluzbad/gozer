@@ -9,7 +9,12 @@
     "angular-resource": "^1.4.0",
     "angular-route": "^1.4.0",
     "angular-sanitize": "^1.4.0",
-    "angular-touch": "^1.4.0"
+    "angular-touch": "^1.4.0",
+    "d3": "^3.5.17",
+    "nvd3": "^1.8.3",
+    "angularjs-nvd3-directives": "^0.0.7",
+    "angular-growl-v2": "^0.7.9",
+    "angular-block-ui": "^0.2.2"
   },
   "devDependencies": {
     "angular-mocks": "^1.4.0"
@@ -24,5 +29,10 @@
         "dist/js/bootstrap.js"
       ]
     }
+  },
+  "resolutions": {
+    "angular": "1.5.5",
+    "d3": "^3.5.17",
+    "nvd3": "^1.8.3"
   }
 }
