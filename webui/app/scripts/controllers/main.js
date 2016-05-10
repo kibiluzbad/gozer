@@ -8,7 +8,7 @@
  * Controller of the gozerWebApp
  */
 angular.module('gozerWebApp')
-  .controller('MainCtrl', ['$scope','$filter','Instance', 'AuthService', function ($scope, $filter, Instance, AuthService) {
+  .controller('MainCtrl', ['$scope','$filter','Instance', 'AuthService', 'growl', function ($scope, $filter, Instance, AuthService, growl) {
 
     //TODO: create login page and remove AuthService from here.
     AuthService.singIn(function(){
@@ -49,6 +49,7 @@ angular.module('gozerWebApp')
       };
     }
     start();
+
     $scope.optionsCpu = {
       chart: {
         title: "CPU",
@@ -101,5 +102,9 @@ angular.module('gozerWebApp')
 
     $scope.getText = function(){
       return !$scope.showProcesses ? "Show Top 10 Processes" : "Hide Top 10 Processes";
+    }
+
+    $scope.save = function(instance){
+      Instance.setThreshold({id:instance.id,threshold: instance.threshold},function(data){growl.success("Threshold saved!");})
     }
   }]);
