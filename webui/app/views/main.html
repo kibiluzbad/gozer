@@ -18,7 +18,7 @@
     </div>
     <div class="col-md-3">
 
-      <nvd3 options="optionscurl -L https://github.com/docker/compose/releases/download/1.7.0/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-composeDisk" data="[
+      <nvd3 options="optionsDisk" data="[
         {'key': '%', y: instance.disk_usage},
         {'key': '', y: 100-instance.disk_usage, color:'#ccc'}
       ]"></nvd3>
@@ -32,7 +32,7 @@
     </div>
 
     <div class="col-md-12" style="margin-top: 25px">
-      <button ng-click="showProcess()" style="margin-bottom: 25px" class="btn btn-primary">{{getText()}}</button>
+      <button ng-click="showProcess()" style="margin-bottom: 25px" class="btn btn-primary">Porcess list</button>
       <table class="table table-condensed table-striped" ng-if="showProcesses">
         <tr>
           <th>Name</th>

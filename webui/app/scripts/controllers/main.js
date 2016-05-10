@@ -13,6 +13,26 @@ angular.module('gozerWebApp')
     //TODO: create login page and remove AuthService from here.
     AuthService.singIn(function(){
       console.log('Logged in');
+       $scope.instances = Instance.query(function(data){
+      Socket.start(function (m) {
+        var json = JSON.parse(m.data);
+        var values = json.new_val;
+        var match;
+        $scope.instances.forEach(function(item){
+          if(item.id == values.id){
+            match = item;
+          }
+        });
+        if(match){
+          match.cpu = values.cpu;
+          match.disk_usage = values.disk_usage;
+          match.processes = values.processes;
+        }else{
+          $scope.instances.push(values);
+        }
+        $scope.$digest()
+      });
+    });
     },function(err){
       console.error(err);
     });
@@ -54,26 +74,7 @@ angular.module('gozerWebApp')
       }
     };
 
-    $scope.instances = Instance.query(function(data){
-      Socket.start(function (m) {
-        var json = JSON.parse(m.data);
-        var values = json.new_val;
-        var match;
-        $scope.instances.forEach(function(item){
-          if(item.id == values.id){
-            match = item;
-          }
-        });
-        if(match){
-          match.cpu = values.cpu;
-          match.disk_usage = values.disk_usage;
-          match.processes = values.processes;
-        }else{
-          $scope.instances.push(values);
-        }
-        $scope.$digest()
-      });
-    });
+   
 
     $scope.showProcesses = false;
 
