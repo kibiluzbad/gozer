@@ -52,3 +52,9 @@ cd agent
 cd webui
 grunt serve
 ```
+
+## Run API tests
+```bash
+cd api
+bundle exec rspec
+```
