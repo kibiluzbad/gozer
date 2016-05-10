@@ -77,4 +77,17 @@ class GozerApi < Sinatra::Application
 
   end
 
+  get '/instance/:id/history' do
+    content_type :json
+    is_authenticated?(env['HTTP_AUTHORIZATION'])
+
+    query = GetHistory.new
+    query.instance_id(instance_id: params[:id])
+
+    result = query.execute(connection: @rdb_connection)
+    #p result
+    result.to_json
+
+  end
+
 end

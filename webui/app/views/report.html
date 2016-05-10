@@ -1,1 +1,24 @@
-<p>This is the about view.</p>
+<h1>Instance history</h1>
+<pre>Inform instance id (MAC Address) and click search.</pre>
+<div class="row marketing">
+
+  <form class="form-inline" ng-submit="search()">
+    <div class="form-group">
+      <label label-for="id">Instance ID:</label> <input class="form-control"  id="id" type="text" ng-model="instance_id"> <button  type="submit" class="btn btn-primary">Search</button>
+    </div>
+  </form>
+
+  <table class="table table-condensed table-striped" ng-if="history.length > 0">
+    <tr>
+      <th>CPU %</th>
+      <th>Disk Usage %</th>
+      <th>Create At</th>
+    </tr>
+    <tr ng-repeat="item in history | orderBy:'item.created_at'">
+      <td ng-bind="item.cpu | number:2"></td>
+      <td ng-bind="item.disk_usage | number:0"></td>
+      <td ng-bind="item.created_at | date:'medium'"></td>
+    </tr>
+  </table>
+
+</div>

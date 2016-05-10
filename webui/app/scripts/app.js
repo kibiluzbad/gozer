@@ -16,7 +16,6 @@ angular
     'ngRoute',
     'ngSanitize',
     'ngTouch',
-    'blockUI',
     'ui-notification',
     'nvd3',
   ])

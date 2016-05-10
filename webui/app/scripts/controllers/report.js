@@ -8,10 +8,12 @@
  * Controller of the gozerWebApp
  */
 angular.module('gozerWebApp')
-  .controller('ReportCtrl', function () {
-    this.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
-  });
+  .controller('ReportCtrl', ['$scope', 'Instance', function ($scope, Instance) {
+    $scope.instance_id = '';
+    $scope.history = [];
+    $scope.search =function(){
+      if($scope.instance_id)
+        $scope.history = Instance.history({id:$scope.instance_id});
+    }
+
+  }]);

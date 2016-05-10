@@ -8,7 +8,7 @@
  * Controller of the gozerWebApp
  */
 angular.module('gozerWebApp')
-  .controller('MainCtrl', ['$scope','$filter','Instance', 'AuthService', 'Notification', function ($scope, $filter, Instance, AuthService, Notification) {
+  .controller('MainCtrl', ['$scope','$filter','Instance', 'AuthService', 'Notification', 'Socket', function ($scope, $filter, Instance, AuthService, Notification, Socket) {
 
     //TODO: create login page and remove AuthService from here.
     AuthService.singIn(function(){
@@ -17,38 +17,7 @@ angular.module('gozerWebApp')
       console.error(err);
     });
 
-    function start() {
-      var ws = new WebSocket('ws://localhost:9292');
-      ws.onopen = function () {
-        $scope.$root.status = "Online";
-        $scope.$root.$digest();
-      };
-      ws.onclose = function () {
-        $scope.$root.status = "Offline";
-        $scope.$root.$digest();
-        setTimeout(function(){start()}, 5000);
-      };
-      ws.onmessage = function (m) {
-
-;        var json = JSON.parse(m.data);
-        var values = json.new_val;
-        var match;
-        $scope.instances.forEach(function(item){
-            if(item.id == values.id){
-             match = item;
-            }
-        });
-        if(match){
-          match.cpu = values.cpu;
-          match.disk_usage = values.disk_usage;
-          match.processes = values.processes;
-        }else{
-          $scope.instances.push(values);
-        }
-        $scope.$digest()
-      };
-    }
-    start();
+    $scope.data = [{key:'100',y:100}];
 
     $scope.optionsCpu = {
       chart: {
@@ -85,14 +54,26 @@ angular.module('gozerWebApp')
       }
     };
 
-    $scope.instances = Instance.query();
-
-    $scope.formatData = function(value){
-      return [
-        {'key': $filter('number')(value,0) + '%', y: value},
-        {'key': '', y: 100-value, color:'#ccc'}
-      ]
-    };
+    $scope.instances = Instance.query(function(data){
+      Socket.start(function (m) {
+        var json = JSON.parse(m.data);
+        var values = json.new_val;
+        var match;
+        $scope.instances.forEach(function(item){
+          if(item.id == values.id){
+            match = item;
+          }
+        });
+        if(match){
+          match.cpu = values.cpu;
+          match.disk_usage = values.disk_usage;
+          match.processes = values.processes;
+        }else{
+          $scope.instances.push(values);
+        }
+        $scope.$digest()
+      });
+    });
 
     $scope.showProcesses = false;
 

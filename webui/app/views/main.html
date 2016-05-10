@@ -11,11 +11,17 @@
     </div>
     <div class="col-md-3">
 
-      <nvd3 options="optionsCpu" data="formatData(instance.cpu)"></nvd3>
+      <nvd3 options="optionsCpu" data="[
+        {'key': $filter('number')(instance.cpu,0) + '%', y: instance.cpu},
+        {'key': '', y: 100-instance.cpu, color:'#ccc'}
+      ]"></nvd3>
     </div>
     <div class="col-md-3">
 
-      <nvd3 options="optionsDisk" data="formatData(instance.disk_usage)"></nvd3>
+      <nvd3 options="optionsDisk" data="[
+        {'key': $filter('number')(instance.disk_usage,0) + '%', y: instance.disk_usage},
+        {'key': '', y: 100-instance.disk_usage, color:'#ccc'}
+      ]"></nvd3>
     </div>
     <div class="col-md-12" style="margin-top: 25px">
       <form class="form-inline">
