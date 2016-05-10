@@ -54,6 +54,9 @@ grunt serve
 ```
 
 ## Run API tests
+
+RethinkDB must be running.
+
 ```bash
 cd api
 bundle exec rspec
