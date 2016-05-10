@@ -1,0 +1,74 @@
+[1mdiff --git a/api/.gitignore b/api/.gitignore[m
+[1mindex db83eea..85c16eb 100644[m
+[1m--- a/api/.gitignore[m
+[1m+++ b/api/.gitignore[m
+[36m@@ -28,4 +28,8 @@[m [mmanifest.yml[m
+ [m
+ # Files that might appear on external disk[m
+ .Spotlight-V100[m
+[31m-.Trashes[m
+\ No newline at end of file[m
+[32m+[m[32m.Trashes[m
+[32m+[m[32m# Elastic Beanstalk Files[m
+[32m+[m[32m.elasticbeanstalk/*[m
+[32m+[m[32m!.elasticbeanstalk/*.cfg.yml[m
+[32m+[m[32m!.elasticbeanstalk/*.global.yml[m
+[1mdiff --git a/auth/.gitignore b/auth/.gitignore[m
+[1mindex 923b697..6994b46 100644[m
+[1m--- a/auth/.gitignore[m
+[1m+++ b/auth/.gitignore[m
+[36m@@ -3,3 +3,8 @@[m [mdb/*.sqlite3[m
+ log/*.log[m
+ tmp/[m
+ .sass-cache/[m
+[32m+[m
+[32m+[m[32m# Elastic Beanstalk Files[m
+[32m+[m[32m.elasticbeanstalk/*[m
+[32m+[m[32m!.elasticbeanstalk/*.cfg.yml[m
+[32m+[m[32m!.elasticbeanstalk/*.global.yml[m
+[1mdiff --git a/docker-compose.yml b/docker-compose.yml[m
+[1mindex 3c91b31..597f395 100644[m
+[1m--- a/docker-compose.yml[m
+[1m+++ b/docker-compose.yml[m
+[36m@@ -49,4 +49,4 @@[m [mauth:[m
+ beanstalkd:[m
+   image: schickling/beanstalkd[m
+   ports:[m
+[31m-    - '11300:11300'[m
+[32m+[m[32m    - '11300:11300'[m
+\ No newline at end of file[m
+[1mdiff --git a/webui/.gitignore b/webui/.gitignore[m
+[1mindex dc5576c..614be9c 100644[m
+[1m--- a/webui/.gitignore[m
+[1m+++ b/webui/.gitignore[m
+[36m@@ -3,3 +3,8 @@[m
+ /.tmp[m
+ /.sass-cache[m
+ /bower_components[m
+[32m+[m
+[32m+[m[32m# Elastic Beanstalk Files[m
+[32m+[m[32m.elasticbeanstalk/*[m
+[32m+[m[32m!.elasticbeanstalk/*.cfg.yml[m
+[32m+[m[32m!.elasticbeanstalk/*.global.yml[m
+[1mdiff --git a/webui/app/views/main.html b/webui/app/views/main.html[m
+[1mindex a336ac6..c577062 100644[m
+[1m--- a/webui/app/views/main.html[m
+[1m+++ b/webui/app/views/main.html[m
+[36m@@ -12,14 +12,14 @@[m
+     <div class="col-md-3">[m
+ [m
+       <nvd3 options="optionsCpu" data="[[m
+[31m-        {'key': $filter('number')(instance.cpu,0) + '%', y: instance.cpu},[m
+[32m+[m[32m        {'key': '%', y: instance.cpu},[m
+         {'key': '', y: 100-instance.cpu, color:'#ccc'}[m
+       ]"></nvd3>[m
+     </div>[m
+     <div class="col-md-3">[m
+ [m
+[31m-      <nvd3 options="optionsDisk" data="[[m
+[31m-        {'key': $filter('number')(instance.disk_usage,0) + '%', y: instance.disk_usage},[m
+[32m+[m[32m      <nvd3 options="optionscurl -L https://github.com/docker/compose/releases/download/1.7.0/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-composeDisk" data="[[m
+[32m+[m[32m        {'key': '%', y: instance.disk_usage},[m
+         {'key': '', y: 100-instance.disk_usage, color:'#ccc'}[m
+       ]"></nvd3>[m
+     </div>[m

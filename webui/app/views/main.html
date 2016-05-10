@@ -12,14 +12,14 @@
     <div class="col-md-3">
 
       <nvd3 options="optionsCpu" data="[
-        {'key': $filter('number')(instance.cpu,0) + '%', y: instance.cpu},
+        {'key': '%', y: instance.cpu},
         {'key': '', y: 100-instance.cpu, color:'#ccc'}
       ]"></nvd3>
     </div>
     <div class="col-md-3">
 
-      <nvd3 options="optionsDisk" data="[
-        {'key': $filter('number')(instance.disk_usage,0) + '%', y: instance.disk_usage},
+      <nvd3 options="optionscurl -L https://github.com/docker/compose/releases/download/1.7.0/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-composeDisk" data="[
+        {'key': '%', y: instance.disk_usage},
         {'key': '', y: 100-instance.disk_usage, color:'#ccc'}
       ]"></nvd3>
     </div>

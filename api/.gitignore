@@ -29,3 +29,7 @@ manifest.yml
 # Files that might appear on external disk
 .Spotlight-V100
 .Trashes
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
