@@ -73,6 +73,7 @@ GEM
     slop (3.6.0)
     sys-filesystem (1.1.5)
       ffi
+    sys-proctable (1.0.0)
     system (0.1.3)
       version (~> 1.0.0)
     systemu (2.6.5)
@@ -96,6 +97,7 @@ DEPENDENCIES
   rest-client
   rspec (~> 3.4.0)
   sys-filesystem
+  sys-proctable
   system
   usagewatch
 

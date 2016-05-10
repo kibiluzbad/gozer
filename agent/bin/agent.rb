@@ -10,8 +10,8 @@ Backburner.configure do |config|
   config.tube_namespace      = "gozer.agent.dev"
   config.namespace_separator = "."
   config.on_error            = lambda { |e| puts e }
-  config.max_job_retries     = 10 # default 0 retries
-  config.retry_delay         = 10 # default 5 seconds
+  config.max_job_retries     = 3 # default 0 retries
+  config.retry_delay         = 1 # default 5 seconds
   config.retry_delay_proc    = lambda { |min_retry_delay, num_retries| min_retry_delay + (num_retries ** 3) }
   config.default_priority    = 65536
   config.respond_timeout     = 120
@@ -29,7 +29,11 @@ fork do
 end
 
 while true
+
   data = machine_info.execute().to_json
-  Backburner.enqueue InstanceJob, data
+  if !data.nil? || !data.empty?
+    Backburner.enqueue InstanceJob, data
+  end
+
   sleep(60)
 end

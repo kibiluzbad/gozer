@@ -8,20 +8,29 @@
  * Controller of the gozerWebApp
  */
 angular.module('gozerWebApp')
-  .controller('MainCtrl', ['$scope','Instance', 'growl', function ($scope, Instance, growl) {
+  .controller('MainCtrl', ['$scope','$filter','Instance', 'AuthService', function ($scope, $filter, Instance, AuthService) {
+
+    //TODO: create login page and remove AuthService from here.
+    AuthService.singIn(function(){
+      console.log('Logged in');
+    },function(err){
+      console.error(err);
+    });
+
     function start() {
       var ws = new WebSocket('ws://localhost:9292');
       ws.onopen = function () {
         $scope.$root.status = "Online";
-        $scope.$root.$apply();
+        $scope.$root.$digest();
       };
       ws.onclose = function () {
         $scope.$root.status = "Offline";
-        $scope.$root.$apply();
+        $scope.$root.$digest();
         setTimeout(function(){start()}, 5000);
       };
       ws.onmessage = function (m) {
-        var json = JSON.parse(m.data);
+
+;        var json = JSON.parse(m.data);
         var values = json.new_val;
         var match;
         $scope.instances.forEach(function(item){
@@ -30,16 +39,67 @@ angular.module('gozerWebApp')
             }
         });
         if(match){
-          item.cpu = match.cpu;
-          item.disk_usage = match.disk_usage;  
+          match.cpu = values.cpu;
+          match.disk_usage = values.disk_usage;
+          match.processes = values.processes;
         }else{
-          $scope.instances.push(match);
+          $scope.instances.push(values);
         }
-        
-        $scope.$apply();
+        $scope.$digest()
       };
     }
     start();
+    $scope.optionsCpu = {
+      chart: {
+        title: "CPU",
+        type: 'pieChart',
+        width: 200,
+        donut: true,
+        x: function(d){return d.key;},
+        y: function(d){return d.y;},
+        showLabels: true,
+        showLegend: false,
+        pie: {
+          startAngle: function(d) { return d.startAngle/2 -Math.PI/2 },
+          endAngle: function(d) { return d.endAngle/2 -Math.PI/2 }
+        },
+        duration: 500
+      }
+    };
+    $scope.optionsDisk = {
+      chart: {
+        title: "Disk",
+        type: 'pieChart',
+        width: 200,
+        donut: true,
+        x: function(d){return d.key;},
+        y: function(d){return d.y;},
+        showLabels: true,
+        showLegend: false,
+        pie: {
+          startAngle: function(d) { return d.startAngle/2 -Math.PI/2 },
+          endAngle: function(d) { return d.endAngle/2 -Math.PI/2 }
+        },
+        duration: 500
+      }
+    };
 
     $scope.instances = Instance.query();
+
+    $scope.formatData = function(value){
+      return [
+        {'key': $filter('number')(value,0) + '%', y: value},
+        {'key': '', y: 100-value, color:'#ccc'}
+      ]
+    };
+
+    $scope.showProcesses = false;
+
+    $scope.showProcess = function(){
+      $scope.showProcesses = !$scope.showProcesses;
+    };
+
+    $scope.getText = function(){
+      return !$scope.showProcesses ? "Show Top 10 Processes" : "Hide Top 10 Processes";
+    }
   }]);

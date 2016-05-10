@@ -1,3 +1,22 @@
+## Run with compose
+
+grunt First drop non tracked files, like: node_modules and bower_components; If it's a new git clone or you never used it locally without docker you can skip this step.
+
+```bash
+git clean -df
+```
+Now run docker compose
+
+```bash
+docker-compose up webui agent
+```
+
+Add 4 more agents
+
+```bash
+docker-compose scale agent=4
+```
+
 ## Start backend
 
 ### Start beanstalkd container

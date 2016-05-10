@@ -36,7 +36,7 @@ class InstanceJob
   end
 
   def self.format_token_header(token)
-    'Bearer ' + token['access_token']
+    "Bearer " + token["access_token"]
   end
 
   def self.save_instance(instance, token)

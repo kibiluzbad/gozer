@@ -8,7 +8,7 @@
  * Controller of the gozerWebApp
  */
 angular.module('gozerWebApp')
-  .controller('AboutCtrl', function () {
+  .controller('ReportCtrl', function () {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',

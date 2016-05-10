@@ -1,13 +1,15 @@
 class Instance
-  attr_reader :cpu, :disk_usage, :processes, :id, :os, :machine_name
+  attr_reader :cpu, :disk_usage, :processes, :id, :os, :machine_name, :threshold
+  attr_accessor :threshold
 
-  def initialize(cpu:, disk_usage:, processes:, id:, os:, machine_name:)
+  def initialize(cpu:, disk_usage:, processes:, id:, os:, machine_name:, threshold:)
     @cpu = cpu
     @disk_usage = disk_usage
     @processes = processes
     @id = id
     @os = os
     @machine_name = machine_name
+    @threshold = threshold
   end
 
   def to_hash
@@ -22,6 +24,7 @@ class Instance
     h["processes"] = processes
     h["os"] = os
     h["machine_name"] = machine_name
+    h["threshold"] = threshold
     h
   end
 end

@@ -1,5 +1,6 @@
 class Instance
   attr_reader :cpu, :disk_usage, :processes, :id, :os, :machine_name
+  attr_accessor :threshold
 
   def initialize(cpu:, disk_usage:, processes:, id:, os:, machine_name:)
     @cpu = cpu
@@ -22,6 +23,7 @@ class Instance
     h["processes"] = processes
     h["os"] = os
     h["machine_name"] = machine_name
+    h["threshold"] = threshold
     h
   end
 end

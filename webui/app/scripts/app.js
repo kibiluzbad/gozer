@@ -18,21 +18,24 @@ angular
     'ngTouch',
     'blockUI',
     'angular-growl',
-    'nvd3ChartDirectives',
+    'nvd3',
   ])
-  .config(function ($routeProvider) {
+  .config(['$routeProvider','$httpProvider', function ($routeProvider, $httpProvider) {
+
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
         controller: 'MainCtrl',
         controllerAs: 'main'
       })
-      .when('/about', {
-        templateUrl: 'views/about.html',
-        controller: 'AboutCtrl',
-        controllerAs: 'about'
+      .when('/reports', {
+        templateUrl: 'views/report.html',
+        controller: 'ReportCtrl',
+        controllerAs: 'report'
       })
       .otherwise({
         redirectTo: '/'
       });
-  });
+
+    $httpProvider.interceptors.push('AuthInterceptor');
+  }]);

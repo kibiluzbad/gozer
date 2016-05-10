@@ -9,7 +9,7 @@ class GozerApi < Sinatra::Application
 
   get '/instances' do
     content_type :json
-    #is_authenticated?(env['HTTP_AUTHORIZATION'])
+    is_authenticated?(env['HTTP_AUTHORIZATION'])
 
     query = GetAllInstances.new
     query.execute(connection: @rdb_connection).to_json
@@ -17,7 +17,10 @@ class GozerApi < Sinatra::Application
   end
 
   post '/instance' do
-    params = JSON.parse(request.body.read)
+    is_authenticated?(env['HTTP_AUTHORIZATION'])
+    data = request.body.read
+    halt 400 if data.nil?
+    params = JSON.parse(data)
     puts params
     save_instance = SaveInstance.new
     instance = Instance.new(cpu: params["cpu"],
@@ -26,6 +29,7 @@ class GozerApi < Sinatra::Application
                             id: params["id"],
                             os: params["os"],
                             machine_name: params["machine_name"])
+    instance.threshold = params["threshold"]
 
     save_instance.instance(instance: instance)
     save_instance.execute(connection: @rdb_connection)
@@ -41,6 +45,35 @@ class GozerApi < Sinatra::Application
     save_instance_history.execute(connection: @rdb_connection)
 
     status 201
+
+  end
+
+  put '/instance/:id' do
+    data = JSON.parse(request.body.read)
+    is_authenticated?(env['HTTP_AUTHORIZATION'])
+
+    command = SetInstanceThreshold.new
+    command.id(id: params[:id])
+    command.threshold(threshold: data["threshold"])
+    begin
+      command.execute(connection: @rdb_connection).to_json
+      halt 200
+    rescue Exception => err
+      p err
+      halt 500
+    end
+  end
+
+  get '/instance/:id/threshold' do
+    content_type :json
+    is_authenticated?(env['HTTP_AUTHORIZATION'])
+
+    query = GetInstance.new
+    query.id(id: params[:id])
+
+    result = query.execute(connection: @rdb_connection)
+
+    result["threshold"].to_s unless result.nil?
 
   end
 

@@ -1,39 +1,36 @@
-<div class="jumbotron">
-  <h1>'Allo, 'Allo!</h1>
-  <p class="lead">
-    <img src="images/yeoman.png" alt="I'm Yeoman"><br>
-    Always a pleasure scaffolding your apps.
-  </p>
-  <p><a class="btn btn-lg btn-success" ng-href="#/">Splendid!<span class="glyphicon glyphicon-ok"></span></a></p>
-</div>
+<h1>Instances Monitored</h1>
+<pre>Auto update every 1 minute.</pre>
+<div class="row marketing">
 
- <div class="row marketing">
+  <div class="row" style="min-height: 190px; border-bottom: #ccc 4px dashed;padding-top: 20px;" ng-repeat="instance in instances" ng-if="instances.length > 0">
 
-<div class="row" ng-repeat="instance in instances" ng-if="instances.length > 0">
-  
-      <div class="col-md-3"><img src="http://deepakkarki.github.io/include/img/about/linux3.png" style="height: 148px"></div>
-      <div class="col-md-4">
-        <p><strong>MAC Adrress:</strong> <span ng-bind="instance.id"></span></p>
-        <p><strong>Machine name:</strong> <span ng-bind="instance.machine_name"></span></p>
-      </div>
-      <div class="col-md-2">
-          <nvd3-pie-chart
-            data="{key:'cpu', value: instance.cpu}"
-            showLabels="false"
-            donut="true"
-            donutRatio=".5"
-            donutLabelsOutside="true">
-        <svg height="80"></svg>
-    </nvd3-pie-chart>
-        </div>
-      <div class="col-md-2">
-         <nvd3-pie-chart
-            data="{key:'cpu', value: instance.disk_usage}"
-            showLabels="false"
-            donut="true"
-            donutRatio=".5"
-            donutLabelsOutside="true">
-        <svg height="80"></svg>
-      </div>
+    <div class="col-md-3"><img src="http://deepakkarki.github.io/include/img/about/linux3.png" style="height: 148px"></div>
+    <div class="col-md-4">
+      <p><strong>MAC Adrress:</strong> <span ng-bind="instance.id"></span></p>
+      <p><strong>Machine name:</strong> <span ng-bind="instance.machine_name"></span></p>
+    </div>
+    <div class="col-md-2">
+
+      <nvd3 options="optionsCpu" data="formatData(instance.cpu)"></nvd3>
+    </div>
+    <div class="col-md-2">
+
+      <nvd3 options="optionsDisk" data="formatData(instance.disk_usage)"></nvd3>
+    </div>
+
+    <div class="col-md-12" style="margin-top: 25px">
+      <button ng-click="showProcess()" style="margin-bottom: 25px" class="btn btn-primary">{{getText()}}</button>
+      <table class="table table-condensed table-striped" ng-if="showProcesses">
+        <tr>
+          <th>Name</th>
+          <th>CPU %</th>
+        </tr>
+        <tr ng-repeat="process in instance.processes">
+          <td ng-bind="process[0]"></td>
+          <td ng-bind="process[1]"></td>
+        </tr>
+      </table>
+    </div>
   </div>
+
 </div>

@@ -17,7 +17,14 @@ class GozerApi < Sinatra::Application
       puts key
       halt 403 if key.nil?
       token = OAuth2::AccessToken.new(client, key.to_s.sub('Bearer ',''))
-      halt 403 unless !token.nil? && !token.expired? && session[:access_token] == token.token
+      begin
+        response = token.get(ENV['SITE'] || "http://localhost:3000")
+        halt 403 unless !token.nil? && !token.expired? && response.status == 200
+      rescue Exception => err
+        p err
+        halt 403
+      end
+
     end
   end
 

@@ -8,6 +8,7 @@ gem 'usagewatch'
 gem 'system'
 gem 'sys-filesystem'
 gem 'macaddr'
+gem 'sys-proctable'
 
 group :test, :development do
   gem 'rspec', '~> 3.4.0'
