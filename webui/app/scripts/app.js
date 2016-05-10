@@ -17,10 +17,10 @@ angular
     'ngSanitize',
     'ngTouch',
     'blockUI',
-    'angular-growl',
+    'ui-notification',
     'nvd3',
   ])
-  .config(['$routeProvider','$httpProvider', function ($routeProvider, $httpProvider) {
+  .config(['$routeProvider','$httpProvider', 'NotificationProvider', function ($routeProvider, $httpProvider, NotificationProvider) {
 
     $routeProvider
       .when('/', {
@@ -36,6 +36,16 @@ angular
       .otherwise({
         redirectTo: '/'
       });
+
+    NotificationProvider.setOptions({
+      delay: 10000,
+      startTop: 20,
+      startRight: 10,
+      verticalSpacing: 20,
+      horizontalSpacing: 20,
+      positionX: 'right',
+      positionY: 'top'
+    });
 
     $httpProvider.interceptors.push('AuthInterceptor');
   }]);

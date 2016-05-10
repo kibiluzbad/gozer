@@ -8,7 +8,7 @@
  * Controller of the gozerWebApp
  */
 angular.module('gozerWebApp')
-  .controller('MainCtrl', ['$scope','$filter','Instance', 'AuthService', 'growl', function ($scope, $filter, Instance, AuthService, growl) {
+  .controller('MainCtrl', ['$scope','$filter','Instance', 'AuthService', 'Notification', function ($scope, $filter, Instance, AuthService, Notification) {
 
     //TODO: create login page and remove AuthService from here.
     AuthService.singIn(function(){
@@ -105,6 +105,6 @@ angular.module('gozerWebApp')
     }
 
     $scope.save = function(instance){
-      Instance.setThreshold({id:instance.id,threshold: instance.threshold},function(data){growl.success("Threshold saved!");})
+      Instance.setThreshold({id:instance.id,threshold: instance.threshold},function(data){Notification.success("Threshold saved!");})
     }
   }]);
