@@ -61,3 +61,7 @@ RethinkDB must be running.
 cd api
 bundle exec rspec
 ```
+
+## Live Demo
+
+http://gozer-502360373.us-east-1.elb.amazonaws.com/
