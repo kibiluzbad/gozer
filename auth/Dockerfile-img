@@ -1,5 +1,7 @@
 FROM ruby:2.1.9
 
+MAINTAINER Leonardo Cardoso <kibiluzbad@gmail.com>
+
 RUN apt-get update
 RUN apt-get install curl
 RUN set -ex \
@@ -38,3 +40,7 @@ RUN gem install bundler
 ADD . /app/user/
 RUN bundle install
 RUN bundle exec rake db:setup
+
+EXPOSE 3000:3000
+
+CMD ["bundle", "exec", "rails", "server", "-b", "0.0.0.0"]

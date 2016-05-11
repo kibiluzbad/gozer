@@ -1,0 +1,8 @@
+webui:
+  image: kibiluzbad/gozer_webui
+  cpu_shares: 20
+  mem_limit: 199000000
+  working_dir: /app/user/
+  ports:
+    - "80:9000"
+    - "35729:35729"

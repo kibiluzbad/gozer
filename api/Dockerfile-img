@@ -2,6 +2,7 @@ FROM ruby:2.3.1
 
 MAINTAINER Leonardo Cardoso <kibiluzbad@gmail.com>
 
+ENV PORT 9292
 # Create some needed directories
 RUN mkdir -p /app/user
 WORKDIR /app/user
@@ -9,3 +10,7 @@ WORKDIR /app/user
 RUN gem install bundler
 ADD . /app/user/
 RUN bundle install
+
+EXPOSE 9292:9292
+
+CMD ["bundle","exec","puma"]

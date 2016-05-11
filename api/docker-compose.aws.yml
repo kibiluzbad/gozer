@@ -1,0 +1,22 @@
+api:
+  image: kibiluzbad/gozer_api
+  cpu_shares: 20
+  mem_limit: 199000000
+  working_dir: /app/user/
+  environment:
+    PORT: 9292
+    RDB_HOST: "rethink"
+    SITE: "http://54.208.123.108:3000"
+    OAUTH2_CLIENT_ID: "4de2fd79af6950291687a9df6f9ab4de93246f020a3e440186bb77fdaba25b0f"
+    OAUTH2_CLIENT_SECRET: "6e6009447cfd2d1a0a8792805fd9efa1a6f01c6faa7b7382659b1b1446b57f2a"
+  ports:
+    - "3001:9292"
+  links:
+    - rethink
+rethink:
+  image: rethinkdb:latest
+  cpu_shares: 20
+  mem_limit: 199000000
+  ports:
+    - "28015"
+    - "8080"

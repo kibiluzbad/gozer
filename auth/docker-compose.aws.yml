@@ -1,0 +1,8 @@
+auth:
+  image: kibiluzbad/gozer_auth
+  cpu_shares: 20
+  mem_limit: 199000000
+  build: auth/.
+  working_dir: /app/user/
+  ports:
+    - "3000:3000"
