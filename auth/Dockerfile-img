@@ -19,4 +19,4 @@ RUN gem install bundler
 ADD . /app/user/
 RUN bundle install
 RUN chown -R app:app /app/user
-CMD RAILS_ENV=production /usr/local/bin/bundle exec rake db:setup ; /sbin/my_init 
+CMD ["./app/user/init.sh"] 
