@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-ruby '2.1.9'
+ruby '2.1.7'
 
 gem 'rails', '3.1.10'
 gem 'jquery-rails'
@@ -12,6 +12,8 @@ gem 'coderay', '~> 0.9.8'
 gem 'redcarpet', '2.0.0b5'
 
 # gem 'pg', :group => :production
+
+gem 'thin'
 
 group :assets do
   gem 'sass-rails',   '~> 3.1.4'

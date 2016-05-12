@@ -1,6 +1,14 @@
 auth:
   build: .
-  command: 'bash -c ''bundle exec rails s'''
+  environment: 
+    RAILS_ENV: development
+    RACK_ENV: development
+    WSGI_ENV: development
+    NODE_ENV: development
+    PASSENGER_APP_ENV: development
+    VIRTUAL_HOST: "gozer-auth.com"
+    LETSENCRYPT_HOST: "gozer-auth.com"
+    LETSENCRYPT_EMAIL: "me@example.com"
   working_dir: /app/user/
   ports:
-    - '3000:3000'
+    - '3000:80'
