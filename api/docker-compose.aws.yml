@@ -1,6 +1,6 @@
 api:
   image: kibiluzbad/gozer_api
-  cpu_shares: 20
+  cpu_shares: 200
   mem_limit: 199000000
   working_dir: /app/user/
   environment:
@@ -15,7 +15,7 @@ api:
     - rethink
 rethink:
   image: rethinkdb:latest
-  cpu_shares: 20
+  cpu_shares: 200
   mem_limit: 199000000
   ports:
     - "28015"

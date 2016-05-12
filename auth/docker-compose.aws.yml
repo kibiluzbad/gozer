@@ -1,6 +1,6 @@
 auth:
   image: kibiluzbad/gozer_auth
-  cpu_shares: 20
+  cpu_shares: 184
   mem_limit: 199000000
   build: auth/.
   working_dir: /app/user/

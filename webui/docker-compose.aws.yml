@@ -1,6 +1,6 @@
 webui:
   image: kibiluzbad/gozer_webui
-  cpu_shares: 20
+  cpu_shares: 300
   mem_limit: 199000000
   working_dir: /app/user/
   ports:
