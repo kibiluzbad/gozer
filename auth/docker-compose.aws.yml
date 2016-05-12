@@ -1,8 +1,23 @@
 auth:
   image: kibiluzbad/gozer_auth
-  cpu_shares: 184
+  cpu_shares: 84
   mem_limit: 199000000
-  build: auth/.
   working_dir: /app/user/
+  environment: 
+    RAILS_ENV: development
+    RACK_ENV: development
+    WSGI_ENV: development
+    NODE_ENV: development
+    PASSENGER_APP_ENV: development
   ports:
-    - "3000:3000"
+    - "3000:80"
+  links:
+    - postgres
+postgres:
+  image: postgres
+  cpu_shares: 100
+  mem_limit: 199000000
+  environment:
+    POSTGRES_PASSWORD: password
+  ports:
+    - "5432:5432"

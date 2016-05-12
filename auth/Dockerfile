@@ -2,8 +2,6 @@ FROM phusion/passenger-ruby21
 
 ENV HOME /root
 
-CMD ["/sbin/my_init"]
-
 # Create some needed directories
 
 RUN mkdir -p /app/user
@@ -18,5 +16,5 @@ ADD webapp.conf /etc/nginx/sites-enabled/webapp.conf
 RUN gem install bundler
 ADD . /app/user/
 RUN bundle install
-RUN bundle exec rake db:setup
 RUN chown -R app:app /app/user
+
