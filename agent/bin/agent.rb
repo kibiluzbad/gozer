@@ -30,9 +30,13 @@ end
 
 while true
 
-  data = machine_info.execute().to_json
-  if !data.nil? || !data.empty?
-    Backburner.enqueue InstanceJob, data
+  begin
+    data = machine_info.execute().to_json
+    if !data.nil? || !data.empty?
+      Backburner.enqueue InstanceJob, data
+    end
+  rescue Exception => err
+    p err
   end
 
   sleep(60)

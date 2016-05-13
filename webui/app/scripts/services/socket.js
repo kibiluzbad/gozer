@@ -11,7 +11,7 @@ angular.module('gozerWebApp')
   .factory('Socket',[ '$rootScope', function ($rootScope) {
 
     function start(onMessage) {
-      var ws = new WebSocket('ws://'+window.location.hostname+':3001');
+      var ws = new WebSocket('ws://'+window.location.hostname+':9292');
       ws.onopen = function () {
         $rootScope.status = "Online";
         $rootScope.$digest();

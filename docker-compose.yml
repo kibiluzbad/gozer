@@ -1,52 +1,64 @@
-webui:
-  build: webui/.
-  command: 'bash -c ''grunt serve'''
-  working_dir: /app/user/
-  ports:
-    - '80:9000'
-    - '35729:35729'
-  links:
-    - api
-agent:
-  build: agent/.
-  command: 'bash -c ''./bin/agent.rb'''
-  working_dir: /app/user/
-  environment:
-    BEANSTALKD_HOST: 'beanstalk://beanstalkd'
-    TOKEN_URL: 'http://api:9292/token'
-    API_URL: 'http://api:9292'
-    OAUTH2_CLIENT_ID: '4de2fd79af6950291687a9df6f9ab4de93246f020a3e440186bb77fdaba25b0f'
-    OAUTH2_CLIENT_SECRET: '6e6009447cfd2d1a0a8792805fd9efa1a6f01c6faa7b7382659b1b1446b57f2a'    
-  links:
-    - beanstalkd
-    - api
-api:
-  build: api/.
-  command: 'bash -c ''bundle exec puma'''
-  working_dir: /app/user/
-  environment:
-    PORT: 9292
-    RDB_HOST: 'rethink'
-    SITE: 'http://auth:3000'
-    OAUTH2_CLIENT_ID: '4de2fd79af6950291687a9df6f9ab4de93246f020a3e440186bb77fdaba25b0f'
-    OAUTH2_CLIENT_SECRET: '6e6009447cfd2d1a0a8792805fd9efa1a6f01c6faa7b7382659b1b1446b57f2a'
-  ports:
-    - '9292:9292'
-  links:
-    - rethink
-    - auth
-rethink:
-  image: rethinkdb:latest
-  ports:
-    - '8080:8080' 
-    - '28015:28015'
-auth:
-  build: auth/.
-  command: 'bash -c ''bundle exec rails s'''
-  working_dir: /app/user/
-  ports:
-    - '3000:3000'
-beanstalkd:
-  image: schickling/beanstalkd
-  ports:
-    - '11300:11300'
+version: '2'
+services:
+  beanstalkd:
+    image: schickling/beanstalkd
+    ports:
+      - "11300:11300"
+  rethink:
+      image: rethinkdb:latest
+      ports:
+        - "8080:8080"
+        - "28015:28015"
+  auth:
+    build: auth/.
+    volumes:
+      - ~/work/gozer/auth/.:/app/user
+    command: 'bash -c ''bundle exec rake db:setup && bundle exec rails s'''
+    working_dir: /app/user/
+    ports:
+      - "3000:3000"
+  api:
+      build: api/.
+      volumes:
+        - ~/work/gozer/api/.:/app/user
+      command: 'bash -c ''bundle exec puma'''
+      working_dir: /app/user/
+      environment:
+        PORT: 9292
+        RDB_HOST: 'rethink'
+        SITE: 'http://auth:3000'
+        OAUTH2_CLIENT_ID: '4de2fd79af6950291687a9df6f9ab4de93246f020a3e440186bb77fdaba25b0f'
+        OAUTH2_CLIENT_SECRET: '6e6009447cfd2d1a0a8792805fd9efa1a6f01c6faa7b7382659b1b1446b57f2a'
+      ports:
+        - "9292:9292"
+      links:
+        - rethink
+        - auth
+  webui:
+    build: webui/.
+    volumes:
+      - ~/work/gozer/webui/.:/app/user
+    command: 'bash -c ''grunt serve'''
+    working_dir: /app/user/
+    ports:
+      - "80:9000"
+      - "35729:35729"
+    links:
+      - api
+  agent:
+    build: agent/.
+    command: 'bash -c ''./bin/agent.rb'''
+    working_dir: /app/user/
+    environment:
+      BEANSTALKD_HOST: 'beanstalk://beanstalkd'
+      TOKEN_URL: 'http://api:9292/token'
+      API_URL: 'http://api:9292'
+      OAUTH2_CLIENT_ID: '4de2fd79af6950291687a9df6f9ab4de93246f020a3e440186bb77fdaba25b0f'
+      OAUTH2_CLIENT_SECRET: '6e6009447cfd2d1a0a8792805fd9efa1a6f01c6faa7b7382659b1b1446b57f2a'
+    links:
+      - beanstalkd
+      - api
+
+
+
+

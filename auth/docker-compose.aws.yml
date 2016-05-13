@@ -3,6 +3,8 @@ auth:
   cpu_shares: 84
   mem_limit: 199000000
   working_dir: /app/user/
+  volumes:
+    - "/app/user:/home/leonardo/work/gozer/auth"
   environment: 
     RAILS_ENV: development
     RACK_ENV: development

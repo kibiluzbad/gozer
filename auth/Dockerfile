@@ -7,7 +7,7 @@ ENV HOME /root
 RUN mkdir -p /app/user
 WORKDIR /app/user
 
-EXPOSE 80
+EXPOSE 3000
 
 RUN rm -f /etc/service/nginx/down
 RUN rm /etc/nginx/sites-enabled/default

@@ -1,20 +1,22 @@
-auth:
-  build: .
-  command: 'bash -c ''bundle exec rake db:setup && /sbin/my_init'''
-  environment: 
-    RAILS_ENV: development
-    RACK_ENV: development
-    WSGI_ENV: development
-    NODE_ENV: development
-    PASSENGER_APP_ENV: development
-  working_dir: /app/user/
-  ports:
-    - '3000:80'
-  links:
-    - postgres
-postgres:
-  image: postgres
-  environment:
-    POSTGRES_PASSWORD: password
-  ports:
-    - "5432"
+version: '2'
+services:
+  auth:
+    build: .
+    volumes:
+      - .:/app/user
+    command: 'bash -c ''bundle exec rake db:setup && /sbin/my_init'''
+    environment:
+      RAILS_ENV: production
+      RACK_ENV: production
+      WSGI_ENV: production
+      NODE_ENV: production
+      PASSENGER_APP_ENV: production
+    working_dir: /app/user/
+    ports:
+      - "3000:3000"
+  postgres:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5432"

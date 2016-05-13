@@ -61,7 +61,13 @@ class GetMachineInfo
 
   def shutdown_check(cpu, id)
     url = get_api_instances_endpoint(id)
-    @threshold = RestClient::Request.execute(method: :get, url: url, headers: {authorization: format_token_header(JSON.parse(get_token))})
+
+    begin
+      @threshold = RestClient::Request.execute(method: :get, url: url, headers: {authorization: format_token_header(JSON.parse(get_token))})
+    rescue Exception => err
+      p err
+      @threshold = nil
+    end
 
     if @threshold.nil? || @threshold.empty?
       @threshold = ""
