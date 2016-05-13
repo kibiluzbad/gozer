@@ -8,7 +8,9 @@ git clean -df
 Now run docker compose
 
 ```bash
-docker-compose up webui agent
+docker-compose up -d auth
+docker-compose up -d rethink api webui
+docker-compose up -d beanstalkd agent
 ```
 
 Add 4 more agents
