@@ -1,0 +1,29 @@
+<article class="template animated slideInRight">
+  <h4>Dashboard</h4>
+
+  <ul class="vehicles">
+    <li *ngFor="let instance of instances">
+
+      <div class="mdl-card mdl-shadow--2dp">
+        <div class="mdl-card__title ubuntu">
+            <h2 class="mdl-card__title-text"></h2>
+        </div>
+        <div class="mdl-card__supporting-text">
+          <ul class="instance-data">
+            <li><p><strong>MAC Address:</strong> {{instance.id}}</p></li>
+            <li><p><strong>Machine Name:</strong> {{instance.machine_name}}</p></li>
+            <li><div><strong>CPU:</strong> <span>{{instance.cpu | number:'2.1-1' }}%</span> <md-progress-circle mode="determinate" color="accent" [value]="instance.cpu"></md-progress-circle></div></li>
+            <li><div><strong>Disk:</strong> <span>{{instance.disk_usage | number:'2.1-1' }}%</span> <md-progress-circle mode="determinate" color="accent" [value]="instance.disk_usage"></md-progress-circle></div></li>
+
+          </ul>
+        </div>
+        <div class="mdl-card__actions mdl-card--border center">
+          <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+            View more
+          </a>
+        </div>
+      </div>
+
+    </li>
+  </ul>
+</article>

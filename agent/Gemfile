@@ -7,7 +7,7 @@ gem 'rest-client'
 gem 'usagewatch'
 gem 'system'
 gem 'sys-filesystem'
-gem 'macaddr'
+gem 'mac-address'
 gem 'sys-proctable'
 
 group :test, :development do

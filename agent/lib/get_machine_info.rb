@@ -2,7 +2,7 @@ require 'usagewatch'
 require 'system'
 require 'sys/filesystem'
 require_relative('instance')
-require 'macaddr'
+require 'mac-address'
 require 'sys/proctable'
 require 'rest-client'
 require 'json'
@@ -12,7 +12,7 @@ class GetMachineInfo
   def execute
     usw = Usagewatch
     cpu = usw.uw_cpuused
-    id = Mac.addr
+    id = MacAddress.address
 
     shutdown = shutdown_check(cpu, id)
     execute_shutdown if shutdown

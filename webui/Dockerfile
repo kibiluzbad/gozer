@@ -1,12 +1,21 @@
-FROM node:4.2.4
-RUN npm update -g npm
-RUN npm install -g grunt-cli bower yo generator-karma generator-angular
+# To build and run with Docker:
+#
+#  $ docker build -t ng2-quickstart .
+#  $ docker run -it --rm -p 3000:3000 -p 3001:3001 ng2-quickstart
+#
+FROM node:latest
 
-RUN mkdir -p /app/user
-WORKDIR /app/user
+RUN mkdir -p /quickstart /home/nodejs && \
+    groupadd -r nodejs && \
+    useradd -r -g nodejs -d /home/nodejs -s /sbin/nologin nodejs && \
+    chown -R nodejs:nodejs /home/nodejs
 
-EXPOSE 80
+WORKDIR /quickstart
+COPY package.json typings.json /quickstart/
+RUN npm install --unsafe-perm=true
 
-ADD . /app/user/
-RUN npm install
-RUN bower install --allow-root
+COPY . /quickstart
+RUN chown -R nodejs:nodejs /quickstart
+USER nodejs
+
+CMD npm start

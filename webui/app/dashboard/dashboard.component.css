@@ -1,0 +1,83 @@
+.dashboard-button {
+  width: 200px;
+  height: 70px;
+}
+
+.mdl-cell--col-3 {
+  width: 25%;
+}
+
+@media (max-width: 1024px) {
+  .mdl-cell.mdl-cell--3-col > button {
+    width: 180px;
+    line-height: 18px;
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 839px) and (min-width: 480px){
+  .mdl-cell.mdl-cell--3-col {
+    width: 25%;
+  }
+  .mdl-cell.mdl-cell--3-col > button {
+    width: 120px;
+    line-height: 18px;
+    font-size: 12px;
+  }
+}
+
+.vehicles {
+  list-style-type: none;
+  padding: 0;
+}
+
+*.vehicles li {
+  padding: 4px;
+  float: left;
+}
+
+.list-text,
+.mdl-card__title-text {
+  font-size: 16px;
+}
+
+.mdl-card {
+  min-height: 350px;
+}
+
+.mdl-card__title {
+  color: #fff;
+  height: 90px;
+}
+
+.ubuntu{
+  background: url('./assets/ubuntu-banner.jpg') top / cover;
+}
+
+.fedora{
+  background: url('https://fedoramagic.files.wordpress.com/2010/03/dna-banner.png') top / cover;
+}
+
+.redhat{
+  background: url('http://perulinux.pe/wp-content/uploads/2014/10/banner_redhat.jpg') top / cover;
+}
+
+.suse{
+  background: url('https://news.opensuse.org/wp-content/uploads/2014/11/google.png') top / cover;
+}
+
+.debian{
+  background: url('https://sabza.org/wp-content/uploads/2013/04/debian-banner-624x225.png') top / cover;
+}
+
+.instance-data li{
+  float: none;
+}
+
+.mdl-card__menu {
+  color: #fff;
+}
+
+.center{
+  display: flex; justify-content: center;
+}

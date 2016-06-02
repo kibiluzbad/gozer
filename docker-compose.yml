@@ -47,6 +47,8 @@ services:
       - api
   agent:
     build: agent/.
+    volumes:
+      - ~/work/gozer/agent/.:/app/user
     command: 'bash -c ''./bin/agent.rb'''
     working_dir: /app/user/
     environment:
