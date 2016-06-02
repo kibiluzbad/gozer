@@ -29,7 +29,7 @@ export class DashboardComponent implements OnInit{
       _instanceService.query(token).subscribe(values => this.instances = values);
     });
 
-   
+
 
   }
 
@@ -52,5 +52,10 @@ export class DashboardComponent implements OnInit{
     }else{
       this.instances.push(instance);
     }
+  }
+
+  gotoDetail(instance:Instance) {
+    let link = ['Instances', { id: instance.id }];
+    this._router.navigate(link);
   }
 }

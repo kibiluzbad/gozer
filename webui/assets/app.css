@@ -34,3 +34,13 @@
     transform: translate3d(0, 0, 0);
   }
 }
+.centered {
+  position: fixed; /* or absolute */
+  top: 50%;
+  left: 50%;
+}
+.spinner{
+  background: url('./loader.gif') no-repeat;
+  width: 64px;
+  height: 64px;
+}

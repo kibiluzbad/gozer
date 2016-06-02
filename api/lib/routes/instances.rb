@@ -64,6 +64,19 @@ class GozerApi < Sinatra::Application
     end
   end
 
+  get '/instance/:id' do
+    content_type :json
+    is_authenticated?(env['HTTP_AUTHORIZATION'])
+
+    query = GetInstance.new
+    query.id(id: params[:id])
+
+    result = query.execute(connection: @rdb_connection)
+
+    result.to_json unless result.nil?
+
+  end
+
   get '/instance/:id/threshold' do
     content_type :json
     is_authenticated?(env['HTTP_AUTHORIZATION'])

@@ -3,13 +3,15 @@
     <div class="mdl-layout__header-row">
       <a class="md-title-icon" href="#" target="_blank"><i></i></a>
       <span class="mdl-layout-title">Gozer Monitor</span>
-      <button id="reset-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--accent mdl-button--raised" (click)="resetDb()">Reset Data</button>
+      <!--<button id="reset-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--accent mdl-button--raised" (click)="resetDb()">Reset Data</button>-->
     </div>
     <div class="mdl-navigation">
         <a *ngFor="let item of menuItems" [routerLink]="item.link" class="nav-link" href="">{{item.caption}}</a>
     </div>
   </header>
+
   <main class="mdl-layout__content">
+
     <section>
       <div class="page-content">
         <router-outlet></router-outlet>

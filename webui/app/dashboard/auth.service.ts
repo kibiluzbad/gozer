@@ -17,7 +17,6 @@ export class AuthService {
 
     return this._http.post(tokenUrl,body)
       .map(res => res.json().access_token)
-      .do(data => console.log(data))
       .catch(this.handleException)
   }
 

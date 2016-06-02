@@ -1,0 +1,41 @@
+<article class="template animated slideInRight" *ngIf="instance">
+  <h4>Instance</h4>
+
+  <p>
+    <strong>MAC Address:</strong> {{instance.id}}
+  </p>
+
+  <p>
+    <strong>Machine Name:</strong> {{instance.machine_name}}
+  </p>
+
+  <p>
+    <strong>CPU usage:</strong> {{instance.cpu}}
+  </p>
+
+  <p>
+    <strong>Disk usage:</strong> {{instance.disk_usage}}
+  </p>
+
+    <div class="process-list mdl-card mdl-shadow--2dp">
+      <div class="mdl-card__title">
+        <h2 class="mdl-card__title-text">Process list</h2>
+      </div>
+      <div class="mdl-card__media">
+      <table class="mdl-data-table mdl-js-data-table">
+        <thead>
+        <tr>
+          <th class="mdl-data-table__cell--non-numeric">Name</th>
+          <th>CPU%</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let process of instance.processes">
+          <td>{{process[0]}}</td>
+          <td>{{process[1] | number:'2.1-1'}}</td>
+        </tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+</article>
