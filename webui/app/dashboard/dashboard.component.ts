@@ -28,9 +28,6 @@ export class DashboardComponent implements OnInit{
     _authService.getToken().subscribe(token => {
       _instanceService.query(token).subscribe(values => this.instances = values);
     });
-
-
-
   }
 
   ngOnInit(){

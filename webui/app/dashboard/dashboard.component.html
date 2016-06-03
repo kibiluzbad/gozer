@@ -12,8 +12,8 @@
           <ul class="instance-data">
             <li><p><strong>MAC Address:</strong> {{instance.id}}</p></li>
             <li><p><strong>Machine Name:</strong> {{instance.machine_name}}</p></li>
-            <li><div><strong>CPU:</strong> <span>{{instance.cpu | number:'2.1-1' }}%</span> <md-progress-circle mode="determinate" color="accent" [value]="instance.cpu"></md-progress-circle></div></li>
-            <li><div><strong>Disk:</strong> <span>{{instance.disk_usage | number:'2.1-1' }}%</span> <md-progress-circle mode="determinate" color="accent" [value]="instance.disk_usage"></md-progress-circle></div></li>
+            <li><div><strong>CPU:</strong> <span>{{instance.cpu | number:'.1-1' }}%</span> <md-progress-circle mode="determinate" color="accent" [value]="instance.cpu"></md-progress-circle></div></li>
+            <li><div><strong>Disk:</strong> <span>{{instance.disk_usage | number:'.1-1' }}%</span> <md-progress-circle mode="determinate" color="accent" [value]="instance.disk_usage"></md-progress-circle></div></li>
 
           </ul>
         </div>

@@ -10,11 +10,11 @@
   </p>
 
   <p>
-    <strong>CPU usage:</strong> {{instance.cpu}}
+    <strong>CPU usage:</strong> {{instance.cpu | number:'.1-1'}}
   </p>
 
   <p>
-    <strong>Disk usage:</strong> {{instance.disk_usage}}
+    <strong>Disk usage:</strong> {{instance.disk_usage | number:'.1-1'}}
   </p>
 
     <div class="process-list mdl-card mdl-shadow--2dp">
@@ -32,10 +32,14 @@
         <tbody>
         <tr *ngFor="let process of instance.processes">
           <td>{{process[0]}}</td>
-          <td>{{process[1] | number:'2.1-1'}}</td>
+          <td>{{process[1] | number:'.1-1'}}</td>
         </tr>
         </tbody>
       </table>
       </div>
     </div>
+<br>
+  <div>
+    <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent" (click)="back()">Back</button>
+  </div>
 </article>

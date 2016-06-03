@@ -29,7 +29,6 @@ import { AuthService } from './dashboard/auth.service';
 ])
 export class AppComponent {
   public menuItems = [
-   { caption: 'Dashboard', link: ['Dashboard'] },
-   { caption: 'Instances', link: ['Instances'] },
+   { caption: 'Dashboard', link: ['Dashboard'] }
  ];
 }
