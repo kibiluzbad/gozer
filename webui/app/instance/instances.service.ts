@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Http, Response, Headers, RequestOptions, URLSearchParams } from '@angular/http';
+import { Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 
+import { AuthHttp } from '../auth/angular2-oauth';
 import { CONFIG } from '../config/dev';
 
 let instancesUrl = CONFIG.baseUrls.api + '/instances';
-let instanceUrl = CONFIG.baseUrls.api + '/instance/';
+let instanceUrl = CONFIG.baseUrls.api + '/instance';
 
 export interface Instance {
   id: string;
@@ -20,20 +21,20 @@ export class InstanceService {
 
   subscription:any = null;
 
-  constructor(private _http: Http) {}
+  constructor(private _authHttp: AuthHttp) {
 
-  query(token: string){
-    return this._http.get(instancesUrl, new RequestOptions({headers: new Headers({'Authorization':'Bearer ' + token})}))
+  }
+
+  query(){
+    return this._authHttp.get(instancesUrl)
       .map((response: Response) => <Instance[]>response.json())
       .do(data => console.log(data))
       .catch(this.handleException);
   }
 
-  get(id:string, token:string) {
+  get(id:string) {
 
-    return this._http.get(instanceUrl+id, new RequestOptions({
-      headers: new Headers({'Authorization': 'Bearer ' + token})
-    }))
+    return this._authHttp.get(`${instanceUrl}/${id}`)
       .map((response:Response) => <Instance>response.json())
       .do(data => {
         console.log(data);

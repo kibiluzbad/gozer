@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 
 import { CONFIG } from '../config/dev';
@@ -10,11 +10,15 @@ let clientSecret = CONFIG.baseUrls.clientSecret;
 
 @Injectable()
 export class AuthService {
-  constructor(private _http: Http) {}
+
+  constructor(private _http: Http) {
+
+  }
 
   getToken(){
-    let body = JSON.stringify({'client_id': clientId, 'client_secret': clientSecret});
 
+    let body = JSON.stringify({'client_id': clientId, 'client_secret': clientSecret});
+    console.log(this);
     return this._http.post(tokenUrl,body)
       .map(res => res.json().access_token)
       .catch(this.handleException)
