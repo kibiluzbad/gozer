@@ -39,8 +39,3 @@
   top: 50%;
   left: 50%;
 }
-.spinner{
-  background: url('./loader.gif') no-repeat;
-  width: 64px;
-  height: 64px;
-}
