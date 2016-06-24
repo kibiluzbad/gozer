@@ -1,15 +1,19 @@
 import { Component, provide } from '@angular/core';
 import { HTTP_PROVIDERS, Http } from '@angular/http';
 import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from '@angular/router-deprecated';
+
 import 'rxjs/Rx'; // load the full rxjs
+
 import { MD_PROGRESS_BAR_DIRECTIVES } from '@angular2-material/progress-bar';
-import {AuthHttp, AuthConfig } from './auth/angular2-oauth';
+
+import { AuthHttp, AuthConfig } from './auth/angular2-oauth';
 
 import { DashboardComponent } from './dashboard/dashboard';
-import { InstanceComponent } from './instance/instance';
-import { InstanceService } from './instance/instances.service';
-import { InstanceUpdate } from './instance/instanceUpdate.service';
-import { AuthService } from './auth/auth.service';
+import { InstanceComponent,
+         InstanceService,
+         InstanceUpdate } from './instance/instance';
+
+import { AuthService } from './auth/auth';
 
 @Component({
     selector: 'my-app',
@@ -20,15 +24,15 @@ import { AuthService } from './auth/auth.service';
       HTTP_PROVIDERS,
       ROUTER_PROVIDERS,
       provide(AuthHttp, {
-        useFactory: ( http:any) => {
+        useFactory: ( http: any, authService: any ) => {
           return new AuthHttp(new AuthConfig({
-            tokenGetter: () => new AuthService(http).getToken(),
-            globalHeaders: [{'Content-Type':'application/json'}],
+            tokenGetter: () => authService.getToken(),
+            globalHeaders: [{'Content-Type': 'application/json'}],
             noJwtError: true,
             noTokenScheme: false
           }), http);
         },
-        deps: [Http]
+        deps: [Http, AuthService]
       }),
       InstanceService,
       AuthService,

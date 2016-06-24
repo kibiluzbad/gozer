@@ -9,11 +9,11 @@ import { Instance, InstanceService } from './instances.service';
   styleUrls: ['app/instance/instance.component.css']
 })
 export class InstanceComponent implements OnInit {
-  private _id:string;
-  public instance:Instance;
+  private _id: string;
+  public instance: Instance;
 
-  constructor(private _instanceService:InstanceService,
-              private _routeParams:RouteParams) {
+  constructor(private _instanceService: InstanceService,
+              private _routeParams: RouteParams) {
   }
 
   ngOnInit() {

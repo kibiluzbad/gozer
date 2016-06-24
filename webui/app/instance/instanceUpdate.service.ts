@@ -8,34 +8,34 @@ let url = CONFIG.baseUrls.ws;
 
 @Injectable()
 export class InstanceUpdate extends Subject<Instance>{
-  private _ws:any;
+  private _ws: any;
 
 
   constructor() {
     super();
-    let me:any = this;
+    let me: any = this;
     this._ws = new WebSocket(url);
-    this._ws.onopen=this.open;
-    this._ws.onclose=this.close;
-    this._ws.onmessage=(m:any) => {
-      var json = JSON.parse(m.data);
-      var value = json.new_val;
+    this._ws.onopen = this.open;
+    this._ws.onclose = this.close;
+    this._ws.onmessage = (m: any) => {
+      let json = JSON.parse(m.data);
+      let value = json.new_val;
 
       me.emit(value);
     };
   }
 
   open() {
-    console.log('Online')
-    //TODO: Emit open
+    console.log('Online');
+    // TODO: Emit open
   }
 
   close() {
-    console.log('Offline')
-    //TODO: Emit close
+    console.log('Offline');
+    // TODO: Emit close
   }
 
-  emit(message:Instance){
+  emit(message: Instance) {
     console.log('Message emitted');
     super.next(message);
   }

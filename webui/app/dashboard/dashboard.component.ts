@@ -10,16 +10,16 @@ import { InstanceUpdate } from '../instance/instanceUpdate.service';
   selector: 'my-dashboard',
   templateUrl: 'app/dashboard/dashboard.component.html',
   styleUrls: ['app/dashboard/dashboard.component.css'],
-  directives: [MdProgressBar,MdProgressCircle]
+  directives: [MdProgressBar, MdProgressCircle]
 })
 export class DashboardComponent implements OnInit {
 
-  instances:Instance[];
-  public determinateValue:number = 30;
+  instances: Instance[];
+  public determinateValue: number = 30;
 
-  constructor(private _router:Router,
-              private _instanceService:InstanceService,
-              private _updateService:InstanceUpdate) {
+  constructor(private _router: Router,
+              private _instanceService: InstanceService,
+              private _updateService: InstanceUpdate) {
   }
 
   ngOnInit() {
@@ -27,12 +27,11 @@ export class DashboardComponent implements OnInit {
     this._instanceService.query().subscribe(values => this.instances = values);
   }
 
-  processInstance(instance:Instance) {
-    let item:Instance = null;
-    if (!this.instances) return;
+  processInstance(instance: Instance) {
+    let item: Instance = null;
+    if (!this.instances) { return; }
     this.instances.forEach(function (i) {
-      if (i.id === instance.id)
-        item = i;
+      if (i.id === instance.id) { item = i; }
     });
 
     if (item) {
@@ -44,7 +43,7 @@ export class DashboardComponent implements OnInit {
     }
   }
 
-  gotoDetail(instance:Instance) {
+  gotoDetail(instance: Instance) {
     let link = ['Instances', {id: instance.id}];
     this._router.navigate(link);
   }

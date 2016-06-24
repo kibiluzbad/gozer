@@ -19,20 +19,20 @@ export interface Instance {
 @Injectable()
 export class InstanceService {
 
-  subscription:any = null;
+  subscription: any = null;
 
   constructor(private _authHttp: AuthHttp) {
 
   }
 
-  query(){
+  query() {
     return this._authHttp.get(instancesUrl)
       .map((response: Response) => <Instance[]>response.json())
       .do(data => console.log(data))
       .catch(this.handleException);
   }
 
-  get(id:string) {
+  get(id: string) {
 
     return this._authHttp.get(`${instanceUrl}/${id}`)
       .map((response:Response) => <Instance>response.json())
@@ -42,7 +42,7 @@ export class InstanceService {
       .catch(this.handleException);
   }
 
-  handleException(error: any){
+  handleException(error: any) {
     console.error(error);
     return Observable.throw(error.json().error || 'Server error');
   }
