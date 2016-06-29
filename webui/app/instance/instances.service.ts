@@ -14,6 +14,7 @@ export interface Instance {
   cpu: number;
   disk_usage: number;
   processes: string[];
+  parsedId: string;
 }
 
 @Injectable()
@@ -27,15 +28,28 @@ export class InstanceService {
 
   query() {
     return this._authHttp.get(instancesUrl)
-      .map((response: Response) => <Instance[]>response.json())
+      .map((response: Response) => this.parseInstances(<Instance[]>response.json()))
       .do(data => console.log(data))
       .catch(this.handleException);
   }
 
-  get(id: string) {
+  private parseInstances(instances: Instance[]) {
+    instances.forEach((i: Instance) => i.parsedId = this.parseId(i.id));
+    return instances;
+  }
 
-    return this._authHttp.get(`${instanceUrl}/${id}`)
-      .map((response:Response) => <Instance>response.json())
+  private parseId(id: string) {
+    let from = -1 !== id.indexOf(':') ? /:/g : /\|/g;
+    let to = -1 !== id.indexOf(':') ? '|' : ':';
+
+    return id.replace(from, to);
+  }
+
+  get(id: string) {
+    let parsed = this.parseId(id);
+    console.log(parsed);
+    return this._authHttp.get(`${instanceUrl}/${parsed}`)
+      .map((response: Response) => <Instance>response.json())
       .do(data => {
         console.log(data);
       })

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RouteParams } from '@angular/router-deprecated';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import { Instance, InstanceService } from './instances.service';
 
@@ -11,14 +11,20 @@ import { Instance, InstanceService } from './instances.service';
 export class InstanceComponent implements OnInit {
   private _id: string;
   public instance: Instance;
+  private sub: any;
 
   constructor(private _instanceService: InstanceService,
-              private _routeParams: RouteParams) {
+              private route: ActivatedRoute,
+              private router: Router) {
   }
 
   ngOnInit() {
-    this._id = this._routeParams.get('id');
-    this._instanceService.get(this._id).subscribe(value => this.instance = value);
+     this.sub = this.route.params.subscribe(params => {
+     console.log(params);
+     this._id = params['id'];
+     
+     this._instanceService.get(this._id).subscribe(value => this.instance = value);
+   });
   }
 
   back() {

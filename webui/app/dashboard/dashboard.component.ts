@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router-deprecated';
+import { Router } from '@angular/router';
 import { MdProgressBar } from '@angular2-material/progress-bar/progress-bar';
 import { MdProgressCircle } from '@angular2-material/progress-circle/progress-circle';
 
@@ -44,7 +44,8 @@ export class DashboardComponent implements OnInit {
   }
 
   gotoDetail(instance: Instance) {
-    let link = ['Instances', {id: instance.id}];
+    console.log(instance.parsedId);
+    let link = ['/instance', instance.parsedId];
     this._router.navigate(link);
   }
 }
