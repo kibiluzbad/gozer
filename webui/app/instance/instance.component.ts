@@ -20,9 +20,8 @@ export class InstanceComponent implements OnInit {
 
   ngOnInit() {
      this.sub = this.route.params.subscribe(params => {
-     console.log(params);
-     this._id = params['id'];
-     
+     this._id = decodeURI(params['id']);
+
      this._instanceService.get(this._id).subscribe(value => this.instance = value);
    });
   }

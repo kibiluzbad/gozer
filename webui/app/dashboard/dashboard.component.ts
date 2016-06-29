@@ -44,7 +44,6 @@ export class DashboardComponent implements OnInit {
   }
 
   gotoDetail(instance: Instance) {
-    console.log(instance.parsedId);
     let link = ['/instance', instance.parsedId];
     this._router.navigate(link);
   }
